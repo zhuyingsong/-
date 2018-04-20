@@ -1,0 +1,38 @@
+int main()
+{
+    HINSTANCE hInstance=GetModuleHandle ( NULL );
+    TCHAR szAppName[]=TEXT ( "teris" );
+    MSG msg;
+    WNDCLASS wc;
+ 
+    wc.style=CS_HREDRAW|CS_VREDRAW;
+    wc.lpfnWndProc=WndProc;
+    wc.cbClsExtra=0;
+    wc.cbWndExtra=0;
+    wc.hInstance=hInstance;
+    wc.hIcon=LoadIcon ( NULL,IDI_APPLICATION );
+    wc.hCursor=LoadCursor ( NULL,IDC_ARROW );
+    wc.hbrBackground= ( HBRUSH ) GetStockObject ( WHITE_BRUSH );
+    wc.lpszMenuName=NULL;
+    wc.lpszClassName=szAppName;
+    if ( !RegisterClass ( &wc ) )
+    {
+        printf ( "RegisterClass occur errors!" );
+        return 0;
+    }
+    hwnd=CreateWindow ( szAppName,TEXT ( "Teris Demo" ),
+                        WS_OVERLAPPEDWINDOW,
+                        0,0,0,0,
+                        NULL,
+                        NULL,
+                        hInstance,
+                        NULL );
+    ShowWindow ( hwnd,SW_SHOW );
+    UpdateWindow ( hwnd );
+    while ( GetMessage ( &msg,NULL,0,0 ) )
+    {
+        TranslateMessage ( &msg );
+        DispatchMessage ( &msg );
+    }
+    return msg.wParam;
+}

@@ -1,0 +1,7 @@
+#include "stdio.h"
+#include "windows.h"
+main()
+{
+Sleep(3000);
+printf("HelloWorld\n");
+}
